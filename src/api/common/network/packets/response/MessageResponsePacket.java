@@ -7,20 +7,21 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/**
- * Ping/Pong response packet
- */
-public class PingResponsePacket extends ResponsePacket {
-    public PingResponsePacket() {
-        super("ping");
+public class MessageResponsePacket extends ResponsePacket {
+
+    public MessageResponsePacket() {
+        super("msg");
     }
 
     @Override
     public void write(ClientSession session, DataInputStream in, DataOutputStream out) {
+        // Read ALL data sent from the MessageRequestPacket
         try {
-            out.writeUTF(this.getPacketId());
+            String sender = in.readUTF();
+            String message = in.readUTF();
+            // Send status code
             out.writeInt(200);
-            out.writeUTF("Pong!");
+            out.writeUTF(String.format("%s: %s", sender, message));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

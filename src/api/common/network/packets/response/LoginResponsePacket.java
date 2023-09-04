@@ -20,7 +20,7 @@ public class LoginResponsePacket extends ResponsePacket {
         try {
             String username = in.readUTF();
             String password = in.readUTF();
-            out.writeUTF("login");
+            out.writeUTF(this.getPacketId());
             if (session.isLoggedIn()) {
                 out.writeInt(200);
                 out.writeUTF("Already Logged in");

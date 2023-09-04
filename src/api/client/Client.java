@@ -51,6 +51,7 @@ public class Client {
             packet.write(this.in, this.out);
             this.out.writeUTF("--EOP--");
             String packetId = this.in.readUTF();
+
             // End of packet
             response.accept(new ResponsePacketContainer(packetId, this.in.readInt(), this.in.readUTF()));
         } catch (IOException e) {
@@ -71,4 +72,51 @@ public class Client {
             status.accept(false, e);
         }
     }
+
+
+    /**
+     * Getter for host
+     *
+     * @return Host
+     */
+    public String getHost() {
+        return host;
+    }
+
+    /**
+     * Getter for the port
+     *
+     * @return Port
+     */
+    public int getPort() {
+        return port;
+    }
+
+    /**
+     * Getter for the socket
+     *
+     * @return Socket
+     */
+    public Socket getSocket() {
+        return socket;
+    }
+
+    /**
+     * Getter for the Socket InputStream
+     *
+     * @return DataInputStream
+     */
+    public DataInputStream getIn() {
+        return in;
+    }
+
+    /**
+     * Getter for the Socket OutputStream
+     *
+     * @return DataOutputStream
+     */
+    public DataOutputStream getOut() {
+        return out;
+    }
+
 }

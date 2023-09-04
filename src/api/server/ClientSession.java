@@ -46,6 +46,7 @@ public class ClientSession {
                 if (packetId.equals("--EOP--")) {
                     continue;
                 }
+                System.out.println(packetId);
                 this.recentPacketId = packetId;
                 ResponsePacket packet = Configuration.getResponses().get(packetId);
                 if (packet == null) {

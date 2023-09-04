@@ -19,6 +19,9 @@ public class MessageResponsePacket extends ResponsePacket {
         try {
             String sender = in.readUTF();
             String message = in.readUTF();
+
+            // Always send packet ID
+            out.writeUTF(this.getPacketId());
             // Send status code
             out.writeInt(200);
             out.writeUTF(String.format("%s: %s", sender, message));

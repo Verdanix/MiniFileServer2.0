@@ -12,6 +12,8 @@ public class MessageRequestPacket extends RequestPacket {
 
     public MessageRequestPacket(String sender, String message) {
         super("msg");
+        this.sender = sender;
+        this.message = message;
     }
 
     @Override

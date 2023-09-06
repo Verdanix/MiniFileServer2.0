@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -34,6 +35,7 @@ public class Client {
             this.socket = new Socket(this.host, this.port);
             this.in = new DataInputStream(this.socket.getInputStream());
             this.out = new DataOutputStream(this.socket.getOutputStream());
+            status.accept(true, null);
         } catch (IOException e) {
             status.accept(false, e);
         }
@@ -46,8 +48,9 @@ public class Client {
      * @param packet   The RequestPacket object you want to send
      * @param response A packet container for the response so you can get the status and message
      */
-    public void write(RequestPacket packet, Consumer<ResponsePacketContainer> response) {
+    public void write(Scanner scanner, RequestPacket packet, Consumer<ResponsePacketContainer> response) {
         try {
+            packet.getData(scanner);
             packet.write(this.in, this.out);
             this.out.writeUTF("--EOP--");
             String packetId = this.in.readUTF();

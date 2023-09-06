@@ -5,6 +5,7 @@ import api.common.network.packets.data.RequestPacket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Packet for logins
@@ -13,10 +14,16 @@ public class LoginRequestPacket extends RequestPacket {
     private String username;
     private String password;
 
-    public LoginRequestPacket(String username, String password) {
+    public LoginRequestPacket() {
         super("login");
-        this.username = username;
-        this.password = password;
+    }
+
+    @Override
+    public void getData(Scanner scanner) {
+        System.out.print("Username: ");
+        this.username = scanner.nextLine();
+        System.out.print("Password: ");
+        this.password = scanner.nextLine();
     }
 
     @Override

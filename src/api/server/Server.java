@@ -46,7 +46,7 @@ public class Server {
                 });
                 thread.start();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             status.accept(false, e);
         }
         return this;

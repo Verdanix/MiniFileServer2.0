@@ -5,6 +5,7 @@ import api.server.ClientSession;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 
 /**
  * Base class for the ResponsePackets
@@ -18,7 +19,7 @@ public abstract class ResponsePacket {
         this.config = Configuration.getInstance();
     }
 
-    public abstract void write(ClientSession session, DataInputStream in, DataOutputStream out);
+    public abstract void write(ClientSession session, DataInputStream in, DataOutputStream out) throws IOException;
 
     public String getPacketId() {
         return packetId;

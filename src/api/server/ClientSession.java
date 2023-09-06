@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -54,9 +55,9 @@ public class ClientSession {
                 }
                 packet.write(this, this.in, this.out);
             }
-        } catch (EOFException ignored) {
+        } catch (EOFException | SocketException ignored) {
             System.out.println("Client disconnected!");
-        } catch (IOException e) {
+        } catch (Exception e) {
             exception.accept(e);
         }
     }
